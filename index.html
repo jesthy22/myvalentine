@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My ONE and ONLY Precious Janalyn</title>
+
+<style>
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.card {
+    background: #fff;
+    padding: 25px 15px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    z-index: 2;
+    max-width: 95%;
+    max-height: 80vh;
+    box-sizing: border-box;
+    position: relative;
+    overflow-y: auto;
+}
+
+h1 {
+    color: #e63946;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+p {
+    color: #e63946;
+    font-size: 0.95rem;
+    margin-top: 10px;
+    line-height: 1.4;
+    opacity: 0; /* hidden by default */
+    transition: opacity 1s ease-in-out; /* fade-in */
+}
+
+img {
+    opacity: 0; /* hidden by default */
+    transition: opacity 1s ease-in-out; /* fade-in */
+}
+
+.buttons {
+    position: relative;
+    height: 55px;
+    margin-top: 10px;
+}
+
+button {
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+}
+
+#yes {
+    background: #e63946;
+    color: white;
+    left: 0;
+}
+
+#no {
+    background: #adb5bd;
+    color: #333;
+    left: 90px;
+}
+
+/* Balloons */
+.balloon {
+    position: absolute;
+    bottom: -150px;
+    width: 45px;
+    height: 65px;
+    border-radius: 50%;
+    animation: float 10s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes float {
+    to { transform: translateY(-120vh) translateX(25px); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    h1 { font-size: 1.3rem; }
+    p { font-size: 0.9rem; }
+    button { font-size: 13px; padding: 7px 14px; }
+    #no { left: 70px; }
+    .balloon { width: 40px; height: 55px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Music loads ONLY after clicking YES -->
+<div id="music"></div>
+
+<div class="card">
+    <h1>Happy Valentine's Day My Precious Janalyn!❤️</h1>
+    <div class="buttons">
+        <button id="yes">Open 💕</button>
+        <button id="no">No 💔</button>
+    </div>
+    
+    <!-- Long love message -->
+    <p id="loveMessage"></p>
+    
+    <!-- Photo reveal -->
+    <img id="lovePhoto" src="janalyn-photo.jpg.png" style="width:80%; max-width:250px; margin-top:10px; border-radius:15px;" alt="Janalyn">
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const musicDiv = document.getElementById("music");
+const loveMessage = document.getElementById("loveMessage");
+const lovePhoto = document.getElementById("lovePhoto");
+
+// Initially hide love message and photo
+loveMessage.style.display = "none";
+lovePhoto.style.display = "none";
+
+// Move NO button – mobile-friendly
+function moveNoButton() {
+    const card = document.querySelector('.card');
+    const cardRect = card.getBoundingClientRect();
+    const maxLeft = cardRect.width - noBtn.offsetWidth;
+    const maxTop = cardRect.height - noBtn.offsetHeight;
+
+    noBtn.style.left = Math.random() * maxLeft + "px";
+    noBtn.style.top = Math.random() * maxTop + "px";
+}
+
+noBtn.addEventListener("mouseover", moveNoButton);
+noBtn.addEventListener("touchstart", moveNoButton);
+
+// Start music ONLY after YES, show message and photo with fade-in
+yesBtn.onclick = () => {
+    musicDiv.innerHTML = `
+        <iframe
+            src="your-universe.mp3"
+            frameborder="0"
+            allow="autoplay">
+        </iframe>
+    `;
+    alert("Yay! 💘 Happy Valentine’s Day Love!");
+
+    // Show long love message with fade-in
+    loveMessage.style.display = "block";
+    loveMessage.textContent = "Happy Valentine's Day Love!, Thank You Love for choosing me and accepting me to be your Partner. I will FOREVER and ALWAYS cherish you hehe, Mahal na Mahal kita Love. Salamat sa pagtanggap sa sakin sa kung ano ako at kung anong meron ako hindi man ako kayamanan pero sa abot ng aking makakaya ibibigay at ipaparamdam ko sayo kung gaano kita kamahal ^,^ hindi ko man mapapangako na hindi kita tayo magkakasakitan sa salita lang love ha, never kitang mapagbubuhatan ng kamay. Sana kapag hindi tayo magkaintindihan wag mong makakalimutan na mahal na'ting lubos ang isa't isa. Appreciated q lahat ng ginagawa mo love maski sa pag-aalala sa pasalubong and everything you've done for us and to me. Pangako ko sayo love once na naging succesful ako babawi ako sa'yo. For now tiis ka muna sakin hehehe. I will stay by your side even at your lowest point of zero days or paldo days pa yan.  Ayawan ka man ng lahat parati lang akong nandirito kakampi mo.  I love you so so so much love!!!  Palagi mong iingatan sarili mo love.  Again Happy Valentine's Day My Precious Janalyn! THANK YOU LORD FOR THIS KIND OF PARTNER!!!";
+    setTimeout(() => { loveMessage.style.opacity = 1; }, 50); // trigger fade-in
+
+    // Reveal photo with fade-in
+    lovePhoto.style.display = "block";
+    setTimeout(() => { lovePhoto.style.opacity = 1; }, 50);
+};
+
+// Balloons
+const colors = ["#e63946", "#ff6f91", "#ff4d6d"];
+for (let i = 0; i < 8; i++) {
+    const b = document.createElement("div");
+    b.className = "balloon";
+    b.style.left = Math.random() * 100 + "vw";
+    b.style.background = colors[Math.floor(Math.random() * colors.length)];
+    b.style.animationDuration = 8 + Math.random() * 5 + "s";
+    document.body.appendChild(b);
+}
+</script>
+
+</body>
+</html>
